@@ -84,3 +84,5 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function () {
 
 
 Route::resource('lelangs', 'LelangController');
+
+Route::resource('barangLelangs', 'BarangLelangController');
