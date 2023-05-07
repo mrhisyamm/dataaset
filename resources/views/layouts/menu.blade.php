@@ -55,3 +55,7 @@
     <a href="{{ route('users.index') }}"><i class="fa fa-user"></i><span>User</span></a>
 
      </ul>
+<li class="{{ Request::is('lelangs*') ? 'active' : '' }}">
+    <a href="{{ route('lelangs.index') }}"><i class="fa fa-edit"></i><span>Lelangs</span></a>
+</li>
+

@@ -86,4 +86,9 @@ class Pembelian extends Model
     {
         return $this->belongsTo(\App\Models\Barang::class, 'barangs_id');
     }
+
+    public function users()
+    {
+        return $this->belongsTo(\App\Models\Barang::class, 'barangs_id');
+    }
 }

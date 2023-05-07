@@ -81,3 +81,6 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function () {
 
 // Route::resource('pembelians', 'PembelianController');
 
+
+
+Route::resource('lelangs', 'LelangController');
