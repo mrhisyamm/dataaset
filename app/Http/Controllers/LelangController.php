@@ -8,6 +8,7 @@ use App\Repositories\LelangRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\BarangLelang;
 use Flash;
 use Response;
 
@@ -31,6 +32,22 @@ class LelangController extends AppBaseController
     public function index(Request $request)
     {
         $lelangs = $this->lelangRepository->all();
+        // return $lelangs;
+        $a = [];
+
+        $i = 0;
+        foreach ($lelangs as $lelang) {
+            
+            $barangLelang = BarangLelang::where('lelang_id',$lelang['id'])->get();
+            $kata = '';
+            foreach ($barangLelang as $barang) {
+                $kata .= "<p> " . 'Nama Barang: ' . $barang['nama_barang'] . "</p><p> Jumlah: " . $barang['jumlah'] . " </p>";
+                $kata .= "<p> ------------------------------------------  </p>";
+            }
+            $lelang['barangLelangs'] = $kata;
+        }
+
+        // return $lelangs;
 
         return view('lelangs.index')
             ->with('lelangs', $lelangs);
