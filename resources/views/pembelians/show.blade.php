@@ -11,7 +11,7 @@
             <div class="card-body">
                 <div class="row" style="padding-left: 20px">
                     @include('pembelians.show_fields')
-                    <a href="{{ route('pembelians.index') }}"><button class="btn btn-danger btn-sm">Back</button></a>
+                    <a href="{{ route('pembelians.index') }}"><button class="btn btn-info btn-sm">Back</button></a>
                 </div>
             </div>
         </div>

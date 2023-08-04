@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Storage;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,9 +19,22 @@ Auth::routes();
 
 Route::get('home', 'HomeController@index');
 
+Route::get('download', function(){
+
+    $filePath = 'petunjuk.pdf';
+
+    if (Storage::exists("public/{$filePath}")) {
+        return response()->download(storage_path("app/public/${filePath}"));
+    }else{
+        abort(404,'File Not Found');
+    }
+});
+
+Route::get('about',[App\Http\Controllers\AboutController::class,'index'])->name('about.index');
 Route::group(['middleware' => ['auth','ceklevel:admin']], function () {
 
     // Route::get('home', 'HomeController@index');
+    
     
     Route::resource('barangs', 'BarangController');
 
@@ -60,6 +73,9 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function () {
     Route::get('/cetak', [App\Http\Controllers\Laporan_PenyusutanController::class,'cetak'])->name('laporan_penyusutan.cetak');
     });
 
+   
+
+
     Route::group(['middleware' => ['auth','ceklevel:admin,user']], function () {
 
         Route::resource('pembelians', 'PembelianController');
@@ -86,3 +102,8 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function () {
 Route::resource('lelangs', 'LelangController');
 
 Route::resource('barangLelangs', 'BarangLelangController');
+
+Route::get('/penawarandetail/{id}', 'PenawaranController@indexDetail')->name('penawaran.detail');
+Route::get('/penawarancreate/{id}', 'PenawaranController@create2')->name('penawarans.create2');
+// Route::get('penawarandetail/$id',[App\Http\Controllers\PenawaranController::class,'indexDetail']);
+Route::resource('penawarans', 'PenawaranController');

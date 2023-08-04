@@ -120,15 +120,15 @@
 <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
 <div class="card card-plain mt-8">
 <div class="card-header pb-0 text-left bg-transparent">
-<h3 class="font-weight-bolder text-info text-gradient">Register Now</h3>
-<p class="mb-0">Enter your email and password to sign Up</p>
+<h3 class="font-weight-bolder text-info text-gradient">Register SISMA</h3>
+<p class="mb-0">Masukan Email</p>
 </div>
 <div class="card-body">
 <form method="post" action="{{ url('/register') }}">
             @csrf
-    <label>Name</label>
+    <label>Nama</label>
             <div class="form-group has-feedback{{ $errors->has('name') ? ' has-error' : '' }}">
-                <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Full Name">
+                <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Nama">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
 
                 @if ($errors->has('name'))
@@ -172,9 +172,9 @@
             </div>
 
 <div class="text-center">
-<button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign up</button>
+<button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Daftar</button>
 </div>
-<p class="text-sm mt-3 mb-0">Already have an account? <a href="{{url('/login')}}" class="text-dark font-weight-bolder">Sign in</a></p>
+<p class="text-sm mt-3 mb-0">sudah punya akun? <a href="{{url('/login')}}" class="text-dark font-weight-bolder">Masuk</a></p>
 </form>
 </div>
 

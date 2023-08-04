@@ -41,7 +41,7 @@
                 '<div class="col-md-2 "><input type="text" readonly class="text-right form-control" name="harga_beli[]" value="'+$('#harga_beli').val()+'"></div>'+
                 '<div class="col-md-1"><input type="text" readonly class="text-right form-control qty" name="qty[]" value="'+$('#qty').val()+'"></div>'+
                 '<div class="col-md-2 "><input type="text" readonly class="text-right form-control subtotal" name="subtotal[]" value="'+$('#subtotal').val()+'"></div>'+
-                 '<div class="col-md-1"><a href="#" class="btn btn-sm btn-danger removes">-</a></div>'+
+                 '<div class="col-md-1"><a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a></div>'+
             '</div>');
             i++;
             $('#tanggal_beli').val('');

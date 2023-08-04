@@ -5,7 +5,9 @@
             <th>No</th>
                 <th>Nama</th>
                 <th>Umur Penyusutan</th>
+                <th>Stok</th>
                 <th>Gambar Aset</th>
+                
         <!-- <th>Harga Beli</th> -->
         <!-- <th>Harga Jual</th> -->
 
@@ -19,6 +21,7 @@
             <td>{{ $no++ }}</td>
                 <td>{{ $barang->nama }}</td>
             <td>{{ $barang->umur_penyusutan }}</td>
+            <td>{{ $barang->stok }}</td>
             <td><img src="{{asset('data/barang')}}/{{$barang->gambar}}" style="width: 20%" alt=""></td>
             <!-- <td>{{ $barang->harga_beli }}</td> -->
             <!-- <td>{{ $barang->harga }}</td> -->

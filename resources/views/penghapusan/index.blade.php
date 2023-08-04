@@ -4,7 +4,7 @@
     <section class="content-header">
         <h4 class="pull-left">Penghapusan Aset</h4>
         <h1 class="pull-right">
-           <a class="btn btn-info pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{{ route('penghapusan.create') }}">Add New</a>
+           <a class="btn btn-info pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{{ route('penghapusan.create') }}">Tambah</a>
         </h1>
     </section>
     <div class="content">

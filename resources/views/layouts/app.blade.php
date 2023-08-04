@@ -74,7 +74,7 @@
         </li>
         <!-- tampilan level user -->
         @if (auth()->user()->level=="user")
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a class="nav-link  " href="{{route('pembelians.index')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -93,9 +93,9 @@
             </div>
             <span class="nav-link-text ms-1">Pembelians</span>
           </a>
-        </li>
+        </li> --}}
         
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a class="nav-link  " href="{{ route('supliers.index') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -114,7 +114,7 @@
             </div>
             <span class="nav-link-text ms-1">supliers</span>
           </a>
-        </li>
+        </li> --}}
 
       <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pelelangan</h6>
       <li class="nav-item">
@@ -279,7 +279,7 @@
           <a class="nav-link  " href="{{ url('/laporanp') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <title>Lapophran</title>
+                <title>Laporan</title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
                     <g transform="translate(1716.000000, 291.000000)">
@@ -362,13 +362,20 @@
                                 <div class="pull-right">
                                             <a href="{{ url('/logout') }}" class="btn btn-dark btn-sm"
                                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                                Sign out <i class="fa fa-sign-out"></i>
+                                                Keluar  <i class="fa fa-sign-out"></i>
                                             </a>
                                             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                                 @csrf
                                             </form>
                                     </div>
                                 </li>
+                                {{-- <li class="user-footer">
+                                  <div class="pull-right">
+                                              <a href="{{ route('about.index')}}" class="btn btn-dark btn-sm">
+                                                  About <i class=""></i>
+                                              </a>
+                                      </div>
+                                  </li> --}}
             
               </ul>
             </li>

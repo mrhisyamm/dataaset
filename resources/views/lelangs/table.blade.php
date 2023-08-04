@@ -5,6 +5,7 @@
                 <th>No Paket</th>
         <th>Detail Barang</th>
         <th>Tgl Deadline</th>
+        <th>Is Done</th>
                 <th colspan="3">Action</th>
             </tr>
         </thead>
@@ -15,11 +16,13 @@
                 <!-- <td>{{ $lelang->barangLelangs }}</td> -->
                 <td><?= $lelang->barangLelangs ?></td>
                 <td>{{ $lelang->tgl_deadline }}</td>
+                <td>{{ $lelang->is_selected == true? 'Pemenang lelang sudah terpilih' : ''}}</td>
                 <td>
                     @if (auth()->user()->level=="admin")
                     {!! Form::open(['route' => ['lelangs.destroy', $lelang->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
                       
+                        <a href="{{ route('penawaran.detail', [$lelang->id]) }}" class='btn btn-info btn-xs'><i class="fa fa-pencil"></i></a>
                         <a href="{{ route('lelangs.show', [$lelang->id]) }}" class='btn btn-warning btn-xs'><i class="fa fa-eye"></i></a>
                         <a href="{{ route('lelangs.edit', [$lelang->id]) }}" class='btn btn-success btn-xs'><i class="fa fa-edit"></i></a>
                         {!! Form::button('<i class="fa fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
@@ -29,7 +32,11 @@
 
                     @if (auth()->user()->level=="user")
                     <div class='btn-group'>
-                       <a href="{{ route('lelangs.show', [$lelang->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open">Ajukan Penawaran</i></a>
+                      @if (auth()->user()->level=="user")
+                    <div class='btn-group'>
+                       <a href="{{ route('penawaran.detail', [$lelang->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open">Ajukan Penawaran</i></a>
+                    </div>
+                    @endif
                     </div>
                     @endif
                 </td>

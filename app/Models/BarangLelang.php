@@ -18,9 +18,9 @@ class BarangLelang extends Model
     public $table = 'barang_lelang';
 
     public $fillable = [
-        'nama_barang',
         'jumlah',
-        'lelang_id'
+        'lelang_id',
+        'barangs_id'
     ];
 
     /**
@@ -30,7 +30,6 @@ class BarangLelang extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'nama_barang' => 'string',
         'jumlah' => 'integer'
     ];
 
@@ -40,7 +39,6 @@ class BarangLelang extends Model
      * @var array
      */
     public static $rules = [
-        'nama_barang' => 'required',
         'jumlah' => 'required'
     ];
 

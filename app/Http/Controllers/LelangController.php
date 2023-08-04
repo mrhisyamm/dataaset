@@ -9,6 +9,8 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\BarangLelang;
+use App\Models\Penawaran;
+use App\Models\Barang;
 use Flash;
 use Response;
 
@@ -41,16 +43,25 @@ class LelangController extends AppBaseController
             $barangLelang = BarangLelang::where('lelang_id',$lelang['id'])->get();
             $kata = '';
             foreach ($barangLelang as $barang) {
-                $kata .= "<p> " . 'Nama Barang: ' . $barang['nama_barang'] . "</p><p> Jumlah: " . $barang['jumlah'] . " </p>";
+                $namaBarang = Barang::find($barang->barangs_id);
+                $kata .= "<p> " . 'Nama Barang: ' . $namaBarang->nama . "</p><p> Jumlah: " . $barang['jumlah'] . " </p>";
                 $kata .= "<p> ------------------------------------------  </p>";
             }
             $lelang['barangLelangs'] = $kata;
+
+            $penawarans = Penawaran::where('lelang_id',$lelang->id)->get();
+
+            foreach ($penawarans as $value) {
+                if ($value->is_selected == true) {
+                    $lelang['is_selected'] = true;
+                }
+            }
         }
 
         // return $lelangs;
+        // return $lelangs;
 
-        return view('lelangs.index')
-            ->with('lelangs', $lelangs);
+        return view('lelangs.index')->with('lelangs', $lelangs);
     }
 
     /**
@@ -75,7 +86,7 @@ class LelangController extends AppBaseController
         $input = $request->all();
         $user = Auth::user();
         $input['users_id'] = $user['id'];
-
+        
         // return $input;
 
         $lelang = $this->lelangRepository->create($input);
@@ -122,6 +133,18 @@ class LelangController extends AppBaseController
             return redirect(route('lelangs.index'));
         }
 
+        //pemenang lelang sudah terpilih
+        $penawarans = Penawaran::where('lelang_id',$lelang->id)->get();
+
+        foreach ($penawarans as $penawaran) {
+            if ($penawaran->is_selected == true) {
+                $lelang['is_selected'] = true;
+            }
+
+            // return
+        }
+        // return $lelang;
+
         return view('lelangs.edit')->with('lelang', $lelang);
     }
 
@@ -135,6 +158,7 @@ class LelangController extends AppBaseController
      */
     public function update($id, UpdateLelangRequest $request)
     {
+        $input = $request->all();
         $lelang = $this->lelangRepository->find($id);
 
         if (empty($lelang)) {
@@ -143,7 +167,20 @@ class LelangController extends AppBaseController
             return redirect(route('lelangs.index'));
         }
 
-        $lelang = $this->lelangRepository->update($request->all(), $id);
+        // return $input;
+
+        $barangLelangs = BarangLelang::where('lelang_id',$id)->get();
+        if (!$lelang->is_done && $request->is_done == true) {
+            foreach ($barangLelangs as $barangLelang) {
+                // return $barangLelang;
+                $barangAset = Barang::where('id',$barangLelang->barangs_id)->first();
+                $barangAset->stok = $barangAset->stok + $barangLelang->jumlah;
+                $barangAset->save();
+            }
+        }
+        
+         $input['is_done'] = $input['is_done'] == 'on' ? true : false;
+        $lelang = $this->lelangRepository->update($input , $id);
 
         Flash::success('Lelang updated successfully.');
 

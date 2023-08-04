@@ -23,7 +23,8 @@ class Lelang extends Model
     public $fillable = [
         'no_paket',
         'tgl_deadline',
-        'users_id'
+        'users_id',
+        'is_done',
     ];
 
     /**
@@ -33,7 +34,8 @@ class Lelang extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'no_paket' => 'string'
+        'no_paket' => 'string',
+        'is_done' => 'boolean'
     ];
 
     /**

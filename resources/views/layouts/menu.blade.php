@@ -63,3 +63,7 @@
     <a href="{{ route('barangLelangs.index') }}"><i class="fa fa-edit"></i><span>Barang Lelangs</span></a>
 </li>
 
+<li class="{{ Request::is('penawarans*') ? 'active' : '' }}">
+    <a href="{{ route('penawarans.index') }}"><i class="fa fa-edit"></i><span>Penawarans</span></a>
+</li>
+

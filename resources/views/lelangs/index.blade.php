@@ -5,7 +5,7 @@
         <h1 class="pull-left">Lelangs</h1>
         @if (auth()->user()->level=="admin")
         <h1 class="pull-right">
-           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{{ route('lelangs.create') }}">Add New</a>
+           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{{ route('lelangs.create') }}">Tambah</a>
         </h1>
         @endif
     </section>

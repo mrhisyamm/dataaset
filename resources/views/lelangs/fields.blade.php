@@ -10,6 +10,20 @@
     {!! Form::date('tgl_deadline', null, ['class' => 'form-control','id'=>'tgl_deadline']) !!}
 </div>
 
+
+{{-- @dd($lelang) --}}
+@if (($lelang['is_selected'] ?? false) && $lelang['is_done'] == 0)
+    <div class="form-group col-sm-6">
+        {!! Form::label('is_done', 'Selesaikan Lelang') !!}
+        <label class="checkbox-inline">
+             {!! Form::checkbox('is_done', null, $lelang['is_done']) !!}
+         </label>
+     </div>
+@else
+    {!! Form::hidden('darielse', true) !!}
+    {!! Form::hidden('is_done', true) !!}
+@endif
+
 @section('scripts')
     <script type="text/javascript">
         $('#tgl_deadline').datetimepicker({

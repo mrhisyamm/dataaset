@@ -8,6 +8,7 @@ use App\Repositories\BarangLelangRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use App\Models\Lelang;
+use App\Models\Barang;
 use Flash;
 use Response;
 
@@ -35,13 +36,13 @@ class BarangLelangController extends AppBaseController
         
         $i = 0;
         foreach ($barangLelangs as $value) {
-            $barangLelangs[$i++]['lelang'] = Lelang::find($value['lelang_id']);
+            $barangLelangs[$i]['lelang'] = Lelang::find($value['lelang_id']);
+            $barangLelangs[$i++]['barang'] = Barang::find($value['barangs_id']);
         }
-
         return view('barang_lelangs.index')
             ->with('barangLelangs', $barangLelangs);
     }
-
+ 
     /**
      * Show the form for creating a new BarangLelang.
      *
@@ -49,9 +50,12 @@ class BarangLelangController extends AppBaseController
      */
     public function create()
     {
-        $lelangs =  lelang::pluck('no_paket','id');
+        $lelangs = lelang::pluck('no_paket','id');
+        $barangs = Barang::pluck('nama','id');
+
+        // return $barangs;
         
-        return view('barang_lelangs.create', compact('lelangs'));
+        return view('barang_lelangs.create', compact('lelangs','barangs'));
     }
 
     /**
@@ -63,8 +67,12 @@ class BarangLelangController extends AppBaseController
      */
     public function store(CreateBarangLelangRequest $request)
     {
-        $input = $request->all();
 
+        $input = $request->all();
+        $input['barangs_id'] = $input['nama_barang'];
+        // nama_barang
+        $barang = Barang::where('id',$request->nama_barang)->first();
+        $input['nama_barang'] = $barang['nama'];
         $barangLelang = $this->barangLelangRepository->create($input);
 
         Flash::success('Barang Lelang saved successfully.');
